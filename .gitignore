@@ -1,0 +1,6 @@
+/.env
+/.vscode
+/Dockerfile
+/dist
+/node_modules
+/test.log
