@@ -49,7 +49,7 @@ function App() {
                   </Routes>
                 </div>
                 <Footer />
-                <Toaster />
+                <Toaster position="bottom-center" reverseOrder={false} />
               </ModalProvider>
               <ReactQueryDevtools initialIsOpen={false} />
             </AuthProvider>

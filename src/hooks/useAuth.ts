@@ -2,12 +2,13 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAuthDetails, loginUser, logoutUser } from "../api/auth"; // your API function
 import { useNavigate } from "react-router-dom";
 import type { Login } from "../types/auth.type";
+import { useState } from "react";
 
 const useAuth = () => {
+ const [isLoggedIn , setIsLoggedIn] =  useState(false)
   const {
     data: userData,
     isFetching: isVerifying,
-    isSuccess: isLoggedIn,
   } = useQuery({
     queryKey: ["auth"],
     queryFn: getAuthDetails,
@@ -15,6 +16,7 @@ const useAuth = () => {
     refetchOnWindowFocus: true,
     staleTime: 0,
   });
+
   const navigation = useNavigate();
   const queryClient = useQueryClient();
   const {
@@ -24,17 +26,19 @@ const useAuth = () => {
   } = useMutation({
     mutationFn: (input: Login) => loginUser(input),
     onSuccess: async (data) => {
+      setIsLoggedIn(true)
       if (data.role === "ADMIN") navigation("/admin");
-      else navigation("/")
+      else navigation("/");
       await queryClient.invalidateQueries({ queryKey: ["auth"] });
     },
     onError: (error) => {
       console.log(error);
     },
   });
-  const { mutate: logout } = useMutation({
+  const { mutate: logout} = useMutation({
     mutationFn: logoutUser,
     onSuccess: async () => {
+      setIsLoggedIn(false)
       navigation("/");
       await queryClient.invalidateQueries({ queryKey: ["auth"] });
     },
@@ -42,6 +46,7 @@ const useAuth = () => {
       console.log(error);
     },
   });
+
   return {
     userData,
     isLoggedIn,

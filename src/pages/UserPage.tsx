@@ -12,7 +12,7 @@ const UserPage = () => {
   const { cartItems } = useCartStore();
   const { openModal } = useModal();
   const { isLoggedIn } = useAuthContext();
-  const { createOrderMutate } = useOrder();
+  const { createOrderMutate, isOrdering } = useOrder();
   function handleOrder() {
     if (isLoggedIn) createOrderMutate();
     if (!isLoggedIn)
@@ -30,7 +30,9 @@ const UserPage = () => {
         <h2 className="p-4 text-2xl font-semibold">CART ITEMS</h2>
         <div className="flex items-center justify-center gap-4">
           {cartItems.length > 0 && (
-            <PrimaryButton onClick={handleOrder}>Place Order</PrimaryButton>
+            <PrimaryButton onClick={handleOrder} disabled={isOrdering}>
+              Place Order
+            </PrimaryButton>
           )}
           <Link to="/user/history">
             <SecondaryButton>Order history</SecondaryButton>

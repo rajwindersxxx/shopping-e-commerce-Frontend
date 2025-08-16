@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import useProduct from "../hooks/useProduct";
 import useCartStore from "../store/useCartStore";
 import { PrimaryButton } from "./ui/PrimaryButton";
@@ -13,7 +14,13 @@ const ProductList = ({ offset }: props) => {
     <>
       {products?.data.map((item) => (
         <ProductCard details={item} key={item.id}>
-          <PrimaryButton className="h-12" onClick={() => addToCart(item)}>
+          <PrimaryButton
+            className="h-12"
+            onClick={() => {
+              addToCart(item);
+              toast.success("Item added to cart ");
+            }}
+          >
             Add to Cart
           </PrimaryButton>
         </ProductCard>

@@ -9,7 +9,7 @@ export async function createOrder(input: CreateOrder) {
 }
 export async function getMyOrders() {
   return await getRequestMany<OrderData>({
-    path: "/order/me",
+    path: "/order/me?sortby=id&&sortOrder=desc",
   });
 }
 export async function getAllOrders() {

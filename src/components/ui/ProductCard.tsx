@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import type { ProductData } from "../../types/product.type";
 import type { ReactNode } from "react";
+import Image from "./Image";
 
 interface props {
   details: ProductData;
@@ -11,7 +12,8 @@ const ProductCard = ({ details, children }: props) => {
   const { name, description, inventoryCount, images, price, id } = details;
   return (
     <div className="flex max-w-sm flex-col justify-between gap-2 overflow-hidden rounded-md bg-white shadow-lg transition-all duration-300 hover:scale-[101%] hover:shadow-xl">
-      <img
+
+      <Image
         className="h-48 w-full object-cover brightness-75"
         src={images[0]}
         alt={name}

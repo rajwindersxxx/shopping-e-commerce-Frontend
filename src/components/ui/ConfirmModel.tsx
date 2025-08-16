@@ -15,7 +15,6 @@ const ConfirmModel = ({ confirmDelete, message, type }: props) => {
     if (confirmDelete) {
       setIsDisable(true);
       confirmDelete();
-      closeModal();
     }
   }
   function handleClose() {

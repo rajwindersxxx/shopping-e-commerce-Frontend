@@ -1,6 +1,8 @@
+import toast from "react-hot-toast";
 import useCartStore from "../store/useCartStore";
 import ErrorMessage from "./ui/ErrorMessage";
 import { PrimaryButton } from "./ui/PrimaryButton";
+import Image from "./ui/Image";
 
 const CartItemsList = () => {
   const { cartItems, removeCartItem, addToCart } = useCartStore();
@@ -11,7 +13,8 @@ const CartItemsList = () => {
     (sum, item) => sum + item.price * item.quantity,
     0,
   );
-  if (cartItems.length === 0) return <ErrorMessage>No items in Cart </ErrorMessage>;
+  if (cartItems.length === 0)
+    return <ErrorMessage>No items in Cart </ErrorMessage>;
   return (
     <div
       className="min-w-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md"
@@ -72,7 +75,7 @@ const CartItemsList = () => {
               role="cell"
             >
               {item.images[0] && (
-                <img
+                <Image
                   src={item.images[0]}
                   alt={item.name}
                   className="h-12 w-12 flex-shrink-0 rounded object-cover"
@@ -96,11 +99,20 @@ const CartItemsList = () => {
               className="flex flex-1 items-center justify-end gap-4 px-4 py-3"
               role="cell"
             >
-              <PrimaryButton onClick={() => addToCart(item)} className="m-0">
+              <PrimaryButton
+                onClick={() => {
+                  addToCart(item);
+                  toast.success("Quantify updated successfully");
+                }}
+                className="m-0"
+              >
                 Add
               </PrimaryButton>
               <PrimaryButton
-                onClick={() => removeCartItem(item.id)}
+                onClick={() => {
+                  removeCartItem(item.id);
+                  toast.success("Item Removed successfully");
+                }}
                 className="bg-red-500 px-3 py-1 text-white transition hover:bg-red-600"
               >
                 Delete

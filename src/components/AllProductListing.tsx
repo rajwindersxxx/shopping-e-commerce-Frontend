@@ -7,7 +7,7 @@ import ErrorMessage from "./ui/ErrorMessage";
 
 const AllProductListing = () => {
   const { paginationLimit, totalProducts, search } = useProductStore();
-  const { isProductsLoading } = useProduct();
+  const { isProductsLoading, products } = useProduct();
   const [list, setList] = useState([0]);
 
   function handlePagination() {
@@ -18,7 +18,7 @@ const AllProductListing = () => {
   }, [search]);
   const hasMore = list[list.length - 1] + paginationLimit < totalProducts;
   if (isProductsLoading) return <Spinner />;
-  if (list.length === 0)
+  if (products?.data.length === 0)
     return <ErrorMessage>No result found, try clear filters</ErrorMessage>;
   return (
     <div className="grid grid-cols-[repeat(auto-fill,minmax(18.75rem,1fr))] gap-8">

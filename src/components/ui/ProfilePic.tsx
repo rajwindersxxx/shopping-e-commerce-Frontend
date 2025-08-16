@@ -10,8 +10,8 @@ const ProfilePic = ({ image }: props) => {
       }
     >
       <img
-        src={image || "https://picsum.photos/id/237/200/300"}
-        className="h-full w-full object-cover"
+        src={image || './defaultUser.jpg'}
+        className="h-full w-full object-cover bg-white"
         alt="image"
       />
     </div>

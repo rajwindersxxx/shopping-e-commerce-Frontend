@@ -5,6 +5,7 @@ import Spinner from "../components/ui/Spinner";
 import { PrimaryButton } from "../components/ui/PrimaryButton";
 import { useAuthContext } from "../context/AuthContext";
 import ProductEditButtons from "../components/ProductEditButtons";
+import Image from "../components/ui/Image";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -72,7 +73,7 @@ const ProductDetails = () => {
         <div className="grid grid-cols-2 gap-4">
           {product.images.length > 0 ? (
             product.images.map((img, idx) => (
-              <img
+              <Image
                 key={idx}
                 src={img}
                 alt={product.name}

@@ -4,6 +4,7 @@ export interface Login {
 }
 export interface SignUp extends Login {
   confirmPassword: string;
+  name: string;
 }
 export interface changePassword {
   currentPassword: string;

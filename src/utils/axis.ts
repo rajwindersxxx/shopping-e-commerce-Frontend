@@ -22,7 +22,10 @@ type RequestOptions = {
 // Single Axios instance for all requests
 export const api = axios.create({
   baseURL: apiUrl,
-  withCredentials: true, 
+  withCredentials: true,
+   headers: {
+    "Access-Control-Allow-Origin": "*",
+  },
 });
 
 // POST request

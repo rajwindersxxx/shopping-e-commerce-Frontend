@@ -30,7 +30,7 @@ const SignupForm = () => {
         />,
         "signUpMessage",
       );
-      navigation("/post");
+      navigation("/login");
     },
     onError: (error) => {
       setError(error.message);
@@ -41,6 +41,17 @@ const SignupForm = () => {
     <div className="absolute top-1/2 left-1/2 w-sm -translate-x-1/2 -translate-y-1/2">
       <h2 className="p-2 text-center text-xl">Sign up to get started</h2>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          label="Name"
+          placeholder="Enter your Name "
+          type="text"
+          {...register("name", {
+            required: "Name is required",
+          })}
+          error={errors.name?.message as string}
+          disabled={isPending}
+          required
+        />
         <Input
           label="Email"
           placeholder="Enter your email "

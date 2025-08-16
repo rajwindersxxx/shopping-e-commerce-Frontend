@@ -7,11 +7,18 @@ interface props {
   order: OrderData;
 }
 const OrdersCard = ({ order }: props) => {
- const {checkoutOrderMutate} =  useOrder();
- const {openModal} =  useModal()
- function handleOrder(id: number) {
-   openModal(<ConfirmModel  type="confirm" message={`Do you want to checkout Order #${order.id}`  }confirmDelete={() => checkoutOrderMutate(id)}/>, "CheckoutModel")
- }
+  const { checkoutOrderMutate } = useOrder();
+  const { openModal } = useModal();
+  function handleOrder(id: number) {
+    openModal(
+      <ConfirmModel
+        type="confirm"
+        message={`Do you want to checkout Order #${order.id}`}
+        confirmDelete={() => checkoutOrderMutate(id)}
+      />,
+      "CheckoutModel",
+    );
+  }
   return (
     <>
       <div
@@ -68,11 +75,13 @@ const OrdersCard = ({ order }: props) => {
                   key={item.id}
                   className="flex items-center justify-between px-3 py-2"
                 >
-                  <span className="text-gray-700 flex-1 ">{item.product.name}</span>
+                  <span className="flex-1 text-gray-700">
+                    {item.product.name}
+                  </span>
                   <span className="text-sm text-gray-500">
                     {item.quantity} × ${item.product.price.toFixed(2)}
                   </span>
-                  <span className="font-medium text-gray-800 flex-1 text-end">
+                  <span className="flex-1 text-end font-medium text-gray-800">
                     ${item.price.toFixed(2)}
                   </span>
                 </li>
@@ -80,9 +89,14 @@ const OrdersCard = ({ order }: props) => {
             </ul>
           </div>
         )}
-          {order.status === "PENDING" && (
-            <PrimaryButton className="float-end" onClick={() => handleOrder(order.id)}>Checkout</PrimaryButton>
-          )}
+        {order.status === "PENDING" && (
+          <PrimaryButton
+            className="float-end"
+            onClick={() => handleOrder(order.id)}
+          >
+            Checkout
+          </PrimaryButton>
+        )}
       </div>
     </>
   );
