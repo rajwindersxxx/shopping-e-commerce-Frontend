@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
-import ProfilePic from "./ui/ProfilePic";
 
 const UserPanel = () => {
   const { userData } = useAuthContext();
