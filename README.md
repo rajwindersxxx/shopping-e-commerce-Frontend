@@ -120,3 +120,7 @@ The frontend interacts with the backend API documented here:
 [**View API Docs in Postman**](https://documenter.getpostman.com/view/36192494/2sB3BHkonF)
 
 ---
+
+## Note
+
+- Frontend is not fully tested. there might be small issues
