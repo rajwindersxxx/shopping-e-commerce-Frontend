@@ -32,6 +32,6 @@ export async function checkoutOrder(orderId: number) {
 }
 export async function dispatchOrder(orderId: number) {
   return await postRequest<OrderData>({
-    path: `/order/checkout/${orderId}`,
+    path: `/order/dispatch/${orderId}`,
   });
 }
