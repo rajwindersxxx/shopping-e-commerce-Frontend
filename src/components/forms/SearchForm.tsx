@@ -19,7 +19,7 @@ const SearchForm = () => {
       <Input
         placeholder="Search For Job"
         type="text"
-        style="rounded"
+        variant="rounded"
         onChange={handleSearch}
       >
         <IoSearch

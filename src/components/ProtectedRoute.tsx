@@ -1,16 +1,21 @@
-import { type ReactNode } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 
-interface props {
-  children: ReactNode;
+interface ProtectedRouteProps {
+  allowedRoles?: string[];
+  redirectTo?: string;
 }
-const ProtectedRoute = ({ children }: props) => {
-  const { isLoggedIn, isVerifying } = useAuthContext();
+
+const ProtectedRoute = ({ allowedRoles, redirectTo = "/login" }: ProtectedRouteProps) => {
+  const { isLoggedIn, isVerifying, userData } = useAuthContext();
 
   if (!isLoggedIn && !isVerifying) return <Navigate to="/login" />;
 
-  return <>{children}</>;
+  if (allowedRoles && userData?.role && !allowedRoles.includes(userData.role)) {
+    return <Navigate to={redirectTo} />;
+  }
+
+  return <Outlet />; //  nested routes render
 };
 
 export default ProtectedRoute;

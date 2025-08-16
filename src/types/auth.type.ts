@@ -10,3 +10,9 @@ export interface changePassword {
   password: string;
   confirmPassword: string;
 }
+export interface UserData {
+  email: string;
+  id: number;
+  role: "ADMIN" | "USER";
+  name: string;
+}

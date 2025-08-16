@@ -9,7 +9,7 @@ export type OrderItems = {
   productId: number;
   quantity: number;
   price: number;
-  product?: {
+  product: {
     name: string;
     price: number;
   };
@@ -24,10 +24,10 @@ export type OrderData = {
   userId: number;
   totalAmount: number;
   totalItems: number;
-  status: "PENDING" | "PAID" | "DISPATCHED";
-  createdAt: string; // ISO
-  updatedAt: string; // ISO
-  items?: OrderItems[]; // included in "GET /me"
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  items: OrderItems[];
 };
 
 

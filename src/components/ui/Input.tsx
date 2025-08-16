@@ -1,6 +1,6 @@
-import React, { type ReactNode } from "react";
+import React, { type InputHTMLAttributes, type ReactNode } from "react";
 
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   name?: string;
   type: string;
@@ -12,13 +12,13 @@ interface InputProps {
   disabled?: boolean;
   error?: string | null;
   required?: boolean;
-  style?: string;
   children?: ReactNode;
+  variant?: string;
 }
 
 export function Input({
   children,
-  style,
+  variant,
   label,
   name,
   type,
@@ -32,7 +32,7 @@ export function Input({
   required = false,
   ...props
 }: InputProps) {
-  if (style === "rounded")
+  if (variant === "rounded")
     return (
       <div className="relative w-full">
         {label && (

@@ -1,4 +1,4 @@
-import { type ProductData, type CreateProduct } from "../types/product.type";
+import { type ProductData } from "../types/product.type";
 import {
   deleteRequest,
   getRequest,
@@ -31,13 +31,13 @@ export async function getAllProducts({
     path: url,
   });
 }
-export async function createProduct(input: CreateProduct) {
+export async function createProduct(input: FormData) {
   return await postRequest<ProductData>({
     path: "/product",
     data: input,
   });
 }
-export async function updateProduct(input: CreateProduct, id: number) {
+export async function updateProduct(input: FormData, id: number) {
   return await patchRequest<ProductData>({
     path: `/product/${id}`,
     data: input,

@@ -5,7 +5,6 @@ import {
   getAllProducts,
   updateProduct,
 } from "../api/product";
-import type { CreateProduct } from "../types/product.type";
 import toast from "react-hot-toast";
 import useProductStore from "../store/useProductStore";
 import { useEffect } from "react";
@@ -30,7 +29,7 @@ const useProduct = ({ limit, offset }: props = {}) => {
   }, [products?.total, setTotalProducts]);
 
   const { mutate: createProductMutate, isPending: isCreating } = useMutation({
-    mutationFn: (input: CreateProduct) => createProduct(input),
+    mutationFn: (input: FormData) => createProduct(input),
     onSuccess: () => {
       queryclient.invalidateQueries({ queryKey: ["products"] });
       toast.success("Product created successfully ");
@@ -40,10 +39,11 @@ const useProduct = ({ limit, offset }: props = {}) => {
     },
   });
   const { mutate: updateProductMutate, isPending: isUpdating } = useMutation({
-    mutationFn: ({ input, id }: { input: CreateProduct; id: number }) =>
+    mutationFn: ({ input, id }: { input: FormData; id: number }) =>
       updateProduct(input, id),
     onSuccess: () => {
       queryclient.invalidateQueries({ queryKey: ["products"] });
+      queryclient.invalidateQueries({ queryKey: ["product"] });
       toast.success("Product updated successfully");
     },
     onError: (error) => {
@@ -54,6 +54,7 @@ const useProduct = ({ limit, offset }: props = {}) => {
     mutationFn: (productId: number) => deleteProduct(productId),
     onSuccess: () => {
       queryclient.invalidateQueries({ queryKey: ["products"] });
+      queryclient.invalidateQueries({ queryKey: ["product"] });
       toast.success("Product deleted successfully");
     },
     onError: (error) => {

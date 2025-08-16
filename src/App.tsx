@@ -12,6 +12,11 @@ import Footer from "./components/ui/Footer";
 import { UIProvider } from "./context/UIContext";
 import HomePage from "./pages/HomePage";
 import ProductDetails from "./pages/ProductDetails";
+import UserPage from "./pages/UserPage";
+import OrderDetails from "./pages/OrderDetails";
+import OrderHistory from "./pages/OrderHistory";
+import ProtectedRoute from "./components/ProtectedRoute";
+import AdminPage from "./pages/AdminPage";
 const queryClient = new QueryClient();
 function App() {
   return (
@@ -24,10 +29,23 @@ function App() {
                 <Header />
                 <div className="flex-1 p-4">
                   <Routes>
+                    {/* Public route */}
                     <Route path="/" index element={<HomePage />} />
                     <Route path="/product/:id" element={<ProductDetails />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<SignupPage />} />
+                    {/* only for user */}
+                    <Route element={<ProtectedRoute allowedRoles={["USER"]} />}>
+                      <Route path="/user" element={<UserPage />}></Route>
+                      <Route path="/user/history" element={<OrderHistory />} />
+                      <Route path="/order/:id" element={<OrderDetails />} />
+                    </Route>
+                    {/* only for admin  */}
+                    <Route
+                      element={<ProtectedRoute allowedRoles={["ADMIN"]} />}
+                    >
+                      <Route path="/admin" element={<AdminPage />} />
+                    </Route>
                   </Routes>
                 </div>
                 <Footer />

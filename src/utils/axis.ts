@@ -22,8 +22,7 @@ type RequestOptions = {
 // Single Axios instance for all requests
 export const api = axios.create({
   baseURL: apiUrl,
-  withCredentials: true, // cookies are sent automatically
-  headers: { "Content-Type": "application/json" },
+  withCredentials: true, 
 });
 
 // POST request

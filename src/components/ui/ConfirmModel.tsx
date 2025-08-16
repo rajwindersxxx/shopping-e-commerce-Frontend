@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useModal } from "../../context/ModalContext";
 import { PrimaryButton } from "./PrimaryButton";
 import { SecondaryButton } from "./SecondaryButton";
-
+// * this model is static component it only use last state when open  not current state
 interface props {
   confirmDelete?: () => void;
   message: string;
@@ -15,6 +15,7 @@ const ConfirmModel = ({ confirmDelete, message, type }: props) => {
     if (confirmDelete) {
       setIsDisable(true);
       confirmDelete();
+      closeModal();
     }
   }
   function handleClose() {
@@ -29,11 +30,7 @@ const ConfirmModel = ({ confirmDelete, message, type }: props) => {
           <SecondaryButton onClick={handleClose} disabled={disable}>
             Cancel
           </SecondaryButton>
-          <PrimaryButton
-            onClick={handleDelete}
-            disabled={disable}
-            style="danger"
-          >
+          <PrimaryButton onClick={handleDelete} disabled={disable}>
             Yes
           </PrimaryButton>
         </div>

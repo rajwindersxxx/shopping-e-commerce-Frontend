@@ -23,9 +23,13 @@ const useAuth = () => {
     error: loginError,
   } = useMutation({
     mutationFn: (input: Login) => loginUser(input),
-    onSuccess: async () => {
-      navigation("/post");
+    onSuccess: async (data) => {
+      if (data.role === "ADMIN") navigation("/admin");
+      else navigation("/")
       await queryClient.invalidateQueries({ queryKey: ["auth"] });
+    },
+    onError: (error) => {
+      console.log(error);
     },
   });
   const { mutate: logout } = useMutation({

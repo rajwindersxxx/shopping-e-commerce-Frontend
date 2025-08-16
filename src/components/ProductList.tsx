@@ -1,14 +1,22 @@
 import useProduct from "../hooks/useProduct";
+import useCartStore from "../store/useCartStore";
+import { PrimaryButton } from "./ui/PrimaryButton";
 import ProductCard from "./ui/ProductCard";
 interface props {
   offset: number;
 }
 const ProductList = ({ offset }: props) => {
   const { products } = useProduct({ offset });
+  const { addToCart } = useCartStore();
+
   return (
     <>
       {products?.data.map((item) => (
-        <ProductCard details={item} key={item.id} />
+        <ProductCard details={item} key={item.id}>
+          <PrimaryButton className="h-12" onClick={() => addToCart(item)}>
+            Add to Cart
+          </PrimaryButton>
+        </ProductCard>
       ))}
     </>
   );

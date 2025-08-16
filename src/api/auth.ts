@@ -1,36 +1,30 @@
-import type { changePassword, Login, SignUp } from "../types/auth.type";
-import { postRequest } from "../utils/axis";
+import type { changePassword, Login, SignUp, UserData } from "../types/auth.type";
+import { getRequest, postRequest } from "../utils/axis";
 
 export async function loginUser(data: Login) {
-  return await postRequest({
-    path: `auth/login`,
+  return await postRequest<{ email: string; role: "ADMIN" | "USER" }>({
+    path: `/auth/login`,
     data,
   });
 }
 export async function signUp(data: SignUp) {
   return await postRequest({
-    path: `auth/SignUp`,
+    path: `/auth/SignUp`,
     data,
   });
 }
 export async function logoutUser() {
   return await postRequest({
-    path: `auth/logout`,
+    path: `/auth/logout`,
     data: null,
   });
 }
 export async function changePassword(data: changePassword) {
   return await postRequest({
-    path: `auth/changePassword`,
+    path: `/auth/changePassword`,
     data: data,
   });
 }
 export async function getAuthDetails() {
-  const res = await fetch(`auth/me`, {
-    credentials: "include",
-  });
-
-  if (!res.ok) throw new Error("Not authenticated");
-
-  return res.json();
+  return await getRequest<UserData>({ path: `/auth/me` });
 }

@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
 import useAuth from "../hooks/useAuth";
-import type { Login } from "../types/auth.type";
+import type { Login, UserData } from "../types/auth.type";
 
 interface AuthContextType {
   isVerifying: boolean;
@@ -9,12 +9,13 @@ interface AuthContextType {
   login: (
     vars: Login,
     opts?: {
-      onSuccess?: (data: object) => void;
+      onSuccess?: (data: unknown) => void;
       onError?: (err: Error) => void;
     },
   ) => void;
+
   logout: () => void;
-  userData: { email: string; id: number };
+  userData: UserData | undefined;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
