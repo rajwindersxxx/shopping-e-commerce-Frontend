@@ -28,7 +28,7 @@ const useAuth = () => {
     onSuccess: async (data) => {
       setIsLoggedIn(true)
       if (data.role === "ADMIN") navigation("/admin");
-      else navigation("/");
+      else navigation("/user");
       await queryClient.invalidateQueries({ queryKey: ["auth"] });
     },
     onError: (error) => {

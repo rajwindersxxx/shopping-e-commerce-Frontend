@@ -35,8 +35,8 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<SignupPage />} />
                     {/* only for user */}
+                    <Route path="/user" element={<UserPage />}></Route>
                     <Route element={<ProtectedRoute allowedRoles={["USER"]} />}>
-                      <Route path="/user" element={<UserPage />}></Route>
                       <Route path="/user/history" element={<OrderHistory />} />
                       <Route path="/order/:id" element={<OrderDetails />} />
                     </Route>

@@ -10,11 +10,9 @@ const UserPanel = () => {
       to={userData?.role === "ADMIN" ? "/admin" : "user"}
       className="flex items-center gap-8"
     >
-      <div className="grid grid-cols-[auto_1fr] grid-rows-2 items-center gap-x-4">
-        <ProfilePic image={undefined} />
+      <div className="grid grid-cols-[auto] grid-rows-2 items-center text-right gap-x-4">
         <p className="text-sm">
           <span className="font-semibold text-orange-400">
-            {" "}
             {userData?.name}
           </span>
         </p>

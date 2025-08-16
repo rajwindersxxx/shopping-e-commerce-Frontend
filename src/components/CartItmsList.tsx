@@ -3,6 +3,7 @@ import useCartStore from "../store/useCartStore";
 import ErrorMessage from "./ui/ErrorMessage";
 import { PrimaryButton } from "./ui/PrimaryButton";
 import Image from "./ui/Image";
+import { Link } from "react-router-dom";
 
 const CartItemsList = () => {
   const { cartItems, removeCartItem, addToCart } = useCartStore();
@@ -14,7 +15,14 @@ const CartItemsList = () => {
     0,
   );
   if (cartItems.length === 0)
-    return <ErrorMessage>No items in Cart </ErrorMessage>;
+    return (
+      <ErrorMessage>
+        No items in Cart{" "}
+        <Link to="/" className="text-orange-400 underline">
+          click to add items
+        </Link>
+      </ErrorMessage>
+    );
   return (
     <div
       className="min-w-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md"
