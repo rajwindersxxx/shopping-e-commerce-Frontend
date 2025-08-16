@@ -1,15 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getAuthDetails, loginUser, logoutUser } from "../api/auth"; // your API function
+import { getAuthDetails, loginUser, logoutUser } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import type { Login } from "../types/auth.type";
-import { useState } from "react";
 
 const useAuth = () => {
- const [isLoggedIn , setIsLoggedIn] =  useState(false)
-  const {
-    data: userData,
-    isFetching: isVerifying,
-  } = useQuery({
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  // Fetch current user
+  const { data: userData, isFetching: isVerifying } = useQuery({
     queryKey: ["auth"],
     queryFn: getAuthDetails,
     retry: false,
@@ -17,8 +16,10 @@ const useAuth = () => {
     staleTime: 0,
   });
 
-  const navigation = useNavigate();
-  const queryClient = useQueryClient();
+  // Derived login state
+  const isLoggedIn = !!userData;
+
+  // Login mutation
   const {
     isPending: isLoggingIn,
     mutate: login,
@@ -26,35 +27,32 @@ const useAuth = () => {
   } = useMutation({
     mutationFn: (input: Login) => loginUser(input),
     onSuccess: async (data) => {
-      setIsLoggedIn(true)
-      if (data.role === "ADMIN") navigation("/admin");
-      else navigation("/user");
       await queryClient.invalidateQueries({ queryKey: ["auth"] });
+      if (data.role === "ADMIN") navigate("/admin");
+      if (data.role === "USER") navigate("/user");
     },
-    onError: (error) => {
-      console.log(error);
-    },
+    onError: (error) => console.log(error),
   });
-  const { mutate: logout} = useMutation({
+
+  // Logout mutation
+  const { mutate: logout } = useMutation({
     mutationFn: logoutUser,
     onSuccess: async () => {
-      setIsLoggedIn(false)
-      navigation("/");
-      await queryClient.invalidateQueries({ queryKey: ["auth"] });
+      queryClient.setQueryData(["auth"], null); // immediately clear cached auth
+      navigate("/");
     },
-    onError: (error) => {
-      console.log(error);
-    },
+    onError: (error) => console.log(error),
   });
 
   return {
     userData,
     isLoggedIn,
-    isLoggingIn,
-    loginError,
     isVerifying,
+    isLoggingIn,
     login,
     logout,
+    loginError,
   };
 };
+
 export default useAuth;

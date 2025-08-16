@@ -4,13 +4,17 @@ import SelectInput from "../components/ui/SelectInput";
 import { useQuery } from "@tanstack/react-query";
 import { getAvailableCategories } from "../api/product";
 import useProductStore from "../store/useProductStore";
+import { useAuthContext } from "../context/AuthContext";
+import { Navigate } from "react-router-dom";
 
 const HomePage = () => {
+  const { userData } = useAuthContext();
   const { setCategory } = useProductStore();
   const { data } = useQuery({
     queryKey: ["categories"],
     queryFn: getAvailableCategories,
   });
+  if (userData?.role === "ADMIN") return <Navigate to="/admin" />;
   return (
     <div>
       <div className="flex w-full items-center justify-between py-8">
