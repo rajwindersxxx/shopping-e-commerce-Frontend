@@ -9,9 +9,11 @@ import { useModal } from "../context/ModalContext";
 import CreateProductForm from "../components/forms/CreateProductForm";
 import { SecondaryButton } from "../components/ui/SecondaryButton";
 import { Link } from "react-router-dom";
+import CategoryFilter from "../components/CategoryFilter";
 
 const AdminPage = () => {
   const { paginationLimit, totalProducts, search } = useProductStore();
+
   const { isProductsLoading } = useProduct();
   const { openModal } = useModal();
   const [list, setList] = useState([0]);
@@ -33,7 +35,8 @@ const AdminPage = () => {
     <div>
       <div className="flex items-center justify-between pt-4 pb-8">
         <h2 className="text-3xl font-semibold">Your Products</h2>
-        <div className="flex gap-4">
+        <div className="flex items-center justify-between gap-4">
+          <CategoryFilter />
           <Link to="/admin/order">
             <SecondaryButton>View Orders</SecondaryButton>
           </Link>

@@ -19,7 +19,7 @@ export function PrimaryButton({
   let buttonStyle;
   if (variant === "normal")
     buttonStyle =
-      "mt-4 rounded bg-orange-600 px-6 py-3 font-semibold text-white transition hover:bg-orange-700";
+      "rounded bg-orange-600 px-6 py-3 font-semibold text-white transition hover:bg-orange-700";
   if (variant === "danger")
     buttonStyle = " hover:bg-red-500 bg-red1 font-semibold";
   return (
