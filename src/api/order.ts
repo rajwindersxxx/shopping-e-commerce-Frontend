@@ -12,9 +12,12 @@ export async function getMyOrders() {
     path: "/order/me?sortby=id&&sortOrder=desc",
   });
 }
-export async function getAllOrders() {
+export async function getAllOrders(status?: string | null) {
+  console.log(status)
+  let url = `/order`
+  if(status) url+=`?status=${status}`
   return await getRequestMany<OrderData>({
-    path: "/order",
+    path: url,
   });
 }
 export async function getOrderedItems(orderId: number) {

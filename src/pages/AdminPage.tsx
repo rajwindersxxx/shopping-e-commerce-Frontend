@@ -1,5 +1,4 @@
 import { PrimaryButton } from "../components/ui/PrimaryButton";
-
 import MyProductListing from "../components/MyProductListing";
 import useProductStore from "../store/useProductStore";
 import useProduct from "../hooks/useProduct";
@@ -8,11 +7,13 @@ import Spinner from "../components/ui/Spinner";
 import ErrorMessage from "../components/ui/ErrorMessage";
 import { useModal } from "../context/ModalContext";
 import CreateProductForm from "../components/forms/CreateProductForm";
+import { SecondaryButton } from "../components/ui/SecondaryButton";
+import { Link } from "react-router-dom";
 
 const AdminPage = () => {
   const { paginationLimit, totalProducts, search } = useProductStore();
   const { isProductsLoading } = useProduct();
-  const {openModal} = useModal();
+  const { openModal } = useModal();
   const [list, setList] = useState([0]);
 
   function handlePagination() {
@@ -26,13 +27,18 @@ const AdminPage = () => {
   if (list.length === 0)
     return <ErrorMessage>No result found, try clear filters</ErrorMessage>;
   function openCreateForm() {
-    openModal(<CreateProductForm />, "productForm")
+    openModal(<CreateProductForm />, "productForm");
   }
   return (
     <div>
       <div className="flex items-center justify-between pt-4 pb-8">
         <h2 className="text-3xl font-semibold">Your Products</h2>
-        <PrimaryButton onClick={openCreateForm}>Add Product</PrimaryButton>
+        <div className="flex gap-4">
+          <Link to="/admin/order">
+            <SecondaryButton>View Orders</SecondaryButton>
+          </Link>
+          <PrimaryButton onClick={openCreateForm}>Add Product</PrimaryButton>
+        </div>
       </div>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(18.75rem,1fr))] gap-8">
         {list.map((offset) => (

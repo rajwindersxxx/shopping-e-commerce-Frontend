@@ -17,6 +17,7 @@ import OrderDetails from "./pages/OrderDetails";
 import OrderHistory from "./pages/OrderHistory";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminPage from "./pages/AdminPage";
+import ProductOrders from "./components/ProductOrders";
 const queryClient = new QueryClient();
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
                       element={<ProtectedRoute allowedRoles={["ADMIN"]} />}
                     >
                       <Route path="/admin" element={<AdminPage />} />
+                      <Route path="/admin/order" element={<ProductOrders />} />
                     </Route>
                   </Routes>
                 </div>

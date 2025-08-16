@@ -1,24 +1,10 @@
-import { useModal } from "../../context/ModalContext";
-import useOrder from "../../hooks/useOrder";
+import type { ReactNode } from "react";
 import type { OrderData } from "../../types/order.types";
-import ConfirmModel from "./ConfirmModel";
-import { PrimaryButton } from "./PrimaryButton";
 interface props {
   order: OrderData;
+  children: ReactNode;
 }
-const OrdersCard = ({ order }: props) => {
-  const { checkoutOrderMutate } = useOrder();
-  const { openModal } = useModal();
-  function handleOrder(id: number) {
-    openModal(
-      <ConfirmModel
-        type="confirm"
-        message={`Do you want to checkout Order #${order.id}`}
-        confirmDelete={() => checkoutOrderMutate(id)}
-      />,
-      "CheckoutModel",
-    );
-  }
+const OrdersCard = ({ order, children }: props) => {
   return (
     <>
       <div
@@ -89,14 +75,7 @@ const OrdersCard = ({ order }: props) => {
             </ul>
           </div>
         )}
-        {order.status === "PENDING" && (
-          <PrimaryButton
-            className="float-end"
-            onClick={() => handleOrder(order.id)}
-          >
-            Checkout
-          </PrimaryButton>
-        )}
+        {children}
       </div>
     </>
   );

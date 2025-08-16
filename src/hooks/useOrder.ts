@@ -1,28 +1,22 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   checkoutOrder,
   createOrder,
   dispatchOrder,
-  getMyOrders,
+
 } from "../api/order";
 import useCartStore from "../store/useCartStore";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../context/ModalContext";
 
+
 const useOrder = () => {
   const queryclient = useQueryClient();
+
   const navigate = useNavigate();
   const { closeModal } = useModal();
   const { cartItems, clearCart } = useCartStore();
-  const { data: MyOrderData, isLoading: isLoadingMyOrders } = useQuery({
-    queryFn: getMyOrders,
-    queryKey: ["myOrders"],
-  });
-  const { data: AllOrderData, isLoading: isLoadingAllOrders } = useQuery({
-    queryFn: getMyOrders,
-    queryKey: ["Orders"],
-  });
   const { mutate: createOrderMutate, isPending: isOrdering } = useMutation({
     mutationFn: async () => {
       //* temp fix
@@ -54,19 +48,15 @@ const useOrder = () => {
     {
       mutationFn: (orderId: number) => dispatchOrder(orderId),
       onSuccess: () => {
-        closeModal();
-        queryclient.invalidateQueries({ queryKey: ["myOrders"] });
+        queryclient.invalidateQueries({ queryKey: ["Orders"] });
         toast.success("Order dispatch successfully ");
+        closeModal();
       },
     },
   );
   return {
-    MyOrderData,
-    isLoadingMyOrders,
     createOrderMutate,
     isOrdering,
-    AllOrderData,
-    isLoadingAllOrders,
     checkoutOrderMutate,
     isCheckingOut,
     dispatchOrderMutate,
