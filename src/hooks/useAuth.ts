@@ -28,6 +28,7 @@ const useAuth = () => {
     mutationFn: (input: Login) => loginUser(input),
     onSuccess: async (data) => {
       await queryClient.invalidateQueries({ queryKey: ["auth"] });
+      console.log(data)
       if (data.role === "ADMIN") navigate("/admin");
       if (data.role === "USER") navigate("/user");
     },

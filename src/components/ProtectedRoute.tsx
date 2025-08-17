@@ -8,10 +8,10 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ allowedRoles, redirectTo = "/login" }: ProtectedRouteProps) => {
-  const { isLoggedIn, isVerifying, userData, isLoggingIn } = useAuthContext();
+  const { isLoggedIn, isVerifying, userData, isInitializing} = useAuthContext();
 
   // 1. Wait for context to initialize (token read)
-  if (isLoggingIn && isVerifying) return <Spinner />;
+  if (isVerifying || isInitializing) return <Spinner />;
 
   // 2. Redirect if not logged in
   if (!isLoggedIn) return <Navigate to="/login" />;
