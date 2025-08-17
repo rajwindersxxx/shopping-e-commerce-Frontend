@@ -9,7 +9,7 @@ import Image from "../components/ui/Image";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { userData } = useAuthContext();
+  const { role } = useAuthContext();
   const { data: product, isLoading } = useQuery({
     queryFn: () => getProductDetails(Number(id)),
     queryKey: ["product", id],
@@ -54,8 +54,12 @@ const ProductDetails = () => {
             </p>
           </div>
 
-          {userData?.role === "ADMIN" ? (
-            <ProductEditButtons productData={product} size={30} className="justify-end gap-4"/>
+          {role === "ADMIN" ? (
+            <ProductEditButtons
+              productData={product}
+              size={30}
+              className="justify-end gap-4"
+            />
           ) : (
             <PrimaryButton
               type="button"

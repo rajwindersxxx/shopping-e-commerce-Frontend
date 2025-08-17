@@ -8,12 +8,14 @@ import {
 import toast from "react-hot-toast";
 import useProductStore from "../store/useProductStore";
 import { useEffect } from "react";
+import { useModal } from "../context/ModalContext";
 interface props {
   offset?: number;
   limit?: number;
 }
 const useProduct = ({ limit, offset }: props = {}) => {
   const queryclient = useQueryClient();
+  const { closeModal } = useModal();
   const { setTotalProducts, search, category } = useProductStore();
   const {
     data: products,
@@ -33,6 +35,7 @@ const useProduct = ({ limit, offset }: props = {}) => {
     onSuccess: () => {
       queryclient.invalidateQueries({ queryKey: ["products"] });
       toast.success("Product created successfully ");
+      closeModal()
     },
     onError: (error) => {
       toast.error(error.message);
@@ -45,6 +48,7 @@ const useProduct = ({ limit, offset }: props = {}) => {
       queryclient.invalidateQueries({ queryKey: ["products"] });
       queryclient.invalidateQueries({ queryKey: ["product"] });
       toast.success("Product updated successfully");
+      closeModal()
     },
     onError: (error) => {
       toast.error(error.message);
@@ -56,6 +60,7 @@ const useProduct = ({ limit, offset }: props = {}) => {
       queryclient.invalidateQueries({ queryKey: ["products"] });
       queryclient.invalidateQueries({ queryKey: ["product"] });
       toast.success("Product deleted successfully");
+      closeModal()
     },
     onError: (error) => {
       toast.error(error.message);
@@ -65,12 +70,12 @@ const useProduct = ({ limit, offset }: props = {}) => {
   return {
     products,
     isProductsLoading,
-    isError,
-    createProductMutate,
     isCreating,
     updateProductMutate,
-    isUpdating,
     deleteProductMutate,
+    createProductMutate,
+    isError,
+    isUpdating,
     isDeleting,
   };
 };

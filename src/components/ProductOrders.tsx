@@ -8,7 +8,7 @@ import OrderListing from "./OrderListing";
 const ProductOrders = () => {
   const [status, setStatus] = useState("");
   const { data: orderData, isLoading } = useQuery({
-    queryKey: ["allOrders", status],
+    queryKey: ["Orders", status],
     queryFn: () => getAllOrders(status),
   });
 

@@ -5,9 +5,9 @@ import { Navigate } from "react-router-dom";
 import CategoryFilter from "../components/CategoryFilter";
 
 const HomePage = () => {
-  const { userData } = useAuthContext();
+  const { role } = useAuthContext();
 
-  if (userData?.role === "ADMIN") return <Navigate to="/admin" />;
+  if (role === "ADMIN") return <Navigate to="/admin" />;
   return (
     <div>
       <div className="flex w-full items-center justify-between py-8">

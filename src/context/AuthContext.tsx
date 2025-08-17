@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext } from "react";
 import useAuth from "../hooks/useAuth";
 import type { Login, UserData } from "../types/auth.type";
 
@@ -6,7 +6,6 @@ interface AuthContextType {
   isVerifying: boolean;
   isLoggedIn: boolean;
   isLoggingIn: boolean;
-  isInitializing: boolean
   login: (
     vars: Login,
     opts?: {
@@ -17,22 +16,33 @@ interface AuthContextType {
 
   logout: () => void;
   userData: UserData | undefined;
+  role: "ADMIN" | "USER" | null
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [isInitializing, setInitializing] = useState(true);
-
-useEffect(() => {
-  setInitializing(false);
-}, []);
-  const { isLoggedIn, isLoggingIn, userData, login, logout, isVerifying } =
-    useAuth();
+  const {
+    isLoggedIn,
+    isLoggingIn,
+    userData,
+    login,
+    logout,
+    isVerifying,
+    role,
+  } = useAuth();
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, isLoggingIn, userData, login, logout, isVerifying, isInitializing }}
+      value={{
+        isLoggedIn,
+        isLoggingIn,
+        userData,
+        login,
+        logout,
+        isVerifying,
+        role,
+      }}
     >
       {children}
     </AuthContext.Provider>

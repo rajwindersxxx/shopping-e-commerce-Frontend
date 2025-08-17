@@ -2,11 +2,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAuthDetails, loginUser, logoutUser } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import type { Login } from "../types/auth.type";
+import { useState } from "react";
 
 const useAuth = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-
+ const [role, setRole] =  useState<'ADMIN'| 'USER' | null>(null)
   // Fetch current user
   const { data: userData, isFetching: isVerifying } = useQuery({
     queryKey: ["auth"],
@@ -28,7 +29,7 @@ const useAuth = () => {
     mutationFn: (input: Login) => loginUser(input),
     onSuccess: async (data) => {
       await queryClient.invalidateQueries({ queryKey: ["auth"] });
-      console.log(data)
+      setRole(data.role)
       if (data.role === "ADMIN") navigate("/admin");
       if (data.role === "USER") navigate("/user");
     },
@@ -39,7 +40,7 @@ const useAuth = () => {
   const { mutate: logout } = useMutation({
     mutationFn: logoutUser,
     onSuccess: async () => {
-      queryClient.setQueryData(["auth"], null); // immediately clear cached auth
+      queryClient.setQueryData(["auth"], null);
       navigate("/");
     },
     onError: (error) => console.log(error),
@@ -50,6 +51,7 @@ const useAuth = () => {
     isLoggedIn,
     isVerifying,
     isLoggingIn,
+    role,
     login,
     logout,
     loginError,
