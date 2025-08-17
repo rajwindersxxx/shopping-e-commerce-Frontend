@@ -1,29 +1,25 @@
-
----
-
 # 🛒 E-Commerce Frontend
 
 A **modern frontend application** for an **e-commerce platform**, built with **React**, **TypeScript**, **Tailwind CSS**, and **React Query**.
 
 This app allows **users to browse products, place orders**, and **track their orders**, while **admins can manage products and orders**. The frontend communicates with a **Node.js/Express backend API**.
 
-
 ## 🛠 Tech Stack
 
 ### **Frontend**
 
-* **React** – Component-based UI
-* **TypeScript** – Type safety across the app
-* **React Router** – Page routing
-* **React Query** – Server state management & caching
-* **React Hook Form** – Form handling & validation
-* **Tailwind CSS** – Rapid styling & responsive design
+- **React** – Component-based UI
+- **TypeScript** – Type safety across the app
+- **React Router** – Page routing
+- **React Query** – Server state management & caching
+- **React Hook Form** – Form handling & validation
+- **Tailwind CSS** – Rapid styling & responsive design
 
 ### **Dev Tools**
 
-* **Vite** – Fast dev server and build tool
-* **ESLint + Prettier** – Linting and formatting
-* **Jest + React Testing Library** – Component testing (optional)
+- **Vite** – Fast dev server and build tool
+- **ESLint + Prettier** – Linting and formatting
+- **Jest + React Testing Library** – Component testing (optional)
 
 ---
 
@@ -125,4 +121,4 @@ The frontend interacts with the backend API documented here:
 ## Note
 
 - Frontend is not fully tested. there might be small issues
-- In Production , FrontEnd is Breaking state , I am still working on It
+- In Production , FrontEnd Break it vercel , I am working on this Issue
