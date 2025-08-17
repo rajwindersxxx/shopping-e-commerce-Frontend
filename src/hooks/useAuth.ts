@@ -40,6 +40,7 @@ const useAuth = () => {
   const { mutate: logout } = useMutation({
     mutationFn: logoutUser,
     onSuccess: async () => {
+      setRole(null)
       queryClient.setQueryData(["auth"], null);
       navigate("/");
     },

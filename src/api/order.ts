@@ -13,9 +13,8 @@ export async function getMyOrders() {
   });
 }
 export async function getAllOrders(status?: string | null) {
-  console.log(status)
   let url = `/order?sortby=id&&sortOrder=desc`
-  if(status) url+=`?status=${status}`
+  if(status) url+=`&&status=${status}`
   return await getRequestMany<OrderData>({
     path: url,
   });

@@ -5,14 +5,14 @@ import { HiOutlineLogin, HiOutlineLogout } from "react-icons/hi";
 import UserPanel from "./UserPanel";
 
 const Navigation = () => {
-  const { isLoggedIn, logout, role } = useAuthContext();
+  const { logout, role } = useAuthContext();
   return (
     <nav className="flex-1">
       <ul className="flex flex-1 items-center justify-end gap-4">
-        {isLoggedIn && <UserPanel />}
+        {role && <UserPanel />}
         {role !== "ADMIN" && <CartButton />}
         <li>
-          {isLoggedIn ? (
+          {role ? (
             <button
               className="flex cursor-pointer items-center gap-2 rounded-full border p-2"
               onClick={() => logout()}

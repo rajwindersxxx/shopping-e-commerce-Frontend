@@ -9,10 +9,10 @@ import useCartStore from "../store/useCartStore";
 const UserPage = () => {
   const { cartItems } = useCartStore();
   const navigate = useNavigate();
-  const { isLoggedIn } = useAuthContext();
+  const { role } = useAuthContext();
   const { createOrderMutate, isOrdering } = useOrder();
   function handleOrder() {
-    if (!isLoggedIn) return navigate("/login");
+    if (!role) return navigate("/login");
     createOrderMutate();
   }
   return (

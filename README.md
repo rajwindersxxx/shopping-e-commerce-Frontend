@@ -118,7 +118,7 @@ The frontend interacts with the backend API documented here:
 
 ---
 
-## Note
+## Challenges
 
-- Frontend is not fully tested. there might be small issues
-- In Production , FrontEnd Break it vercel , I am working on this Issue
+- I use react query for state management which cause Ui out of sync problem , i used it wrong way
+- In vercel React router fail , so i need to config vercel.json
