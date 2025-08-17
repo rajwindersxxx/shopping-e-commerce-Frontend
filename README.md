@@ -1,3 +1,4 @@
+
 ---
 
 # 🛒 E-Commerce Frontend
