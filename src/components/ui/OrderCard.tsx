@@ -5,7 +5,14 @@ interface props {
   children: ReactNode;
 }
 const OrdersCard = ({ order, children }: props) => {
-  console.log(order)
+  const totalAmount = order.items
+    .reduce((sum, item) => {
+      return sum + item.quantity * item.product.price;
+    }, 0)
+    .toFixed(2);
+  const totalQuantity = order.items.reduce((sum, item) => {
+    return sum + item.quantity;
+  }, 0);
   return (
     <>
       <div
@@ -34,14 +41,16 @@ const OrdersCard = ({ order, children }: props) => {
         <div className="mb-4 grid grid-cols-3 text-sm text-gray-600">
           <div>
             <span className="block font-medium text-gray-500">Total Items</span>
-            <span className="text-gray-800">{order.totalItems}</span>
+            <span className="text-gray-800">
+              {order.totalItems || totalQuantity}
+            </span>
           </div>
           <div className="text-right">
             <span className="block font-medium text-gray-500">
               Total Amount
             </span>
             <span className="font-semibold text-gray-800">
-              ${order.totalAmount.toFixed(2)}
+              ${order.totalAmount?.toFixed(2) ?? totalAmount}
             </span>
           </div>
           <div className="text-right">
@@ -69,7 +78,9 @@ const OrdersCard = ({ order, children }: props) => {
                     {item.quantity} × ${item.product.price.toFixed(2)}
                   </span>
                   <span className="flex-1 text-end font-medium text-gray-800">
-                    ${item.price.toFixed(2)}
+                    $
+                    {item.price?.toFixed(2) ??
+                      (Number(item.quantity) * item.product.price).toFixed(2)}
                   </span>
                 </li>
               ))}

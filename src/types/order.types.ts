@@ -22,8 +22,8 @@ export type CreateOrder = {
 export type OrderData = {
   id: number;
   userId: number;
-  totalAmount: number;
-  totalItems: number;
+  totalAmount?: number;
+  totalItems?: number;
   status: string;
   createdAt: string;
   updatedAt: string;
