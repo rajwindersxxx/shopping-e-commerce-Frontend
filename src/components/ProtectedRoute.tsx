@@ -14,7 +14,7 @@ const ProtectedRoute = ({
   const { isLoggingIn, role,  userData, isVerifying } = useAuthContext();
   if (isLoggingIn || isVerifying) return <Spinner />;
   // 2. Redirect I there is no role
-  if (!userData?.role) return <Navigate to="/login" />;
+  if (!userData?.role && !isVerifying) return <Navigate to="/login" />;
 
   // 3. Redirect if role not allowed
   if (allowedRoles && role && !allowedRoles.includes(role)) {
