@@ -75,7 +75,7 @@ const OrdersCard = ({ order, children }: props) => {
                     {item.product.name}
                   </span>
                   <span className="text-sm text-gray-500">
-                    {item.quantity} × ${item.product.price.toFixed(2)}
+                    {item.quantity} × ${item.price ??  item.product.price.toFixed(2)}
                   </span>
                   <span className="flex-1 text-end font-medium text-gray-800">
                     $
