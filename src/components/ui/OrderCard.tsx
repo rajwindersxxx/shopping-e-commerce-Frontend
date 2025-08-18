@@ -5,6 +5,7 @@ interface props {
   children: ReactNode;
 }
 const OrdersCard = ({ order, children }: props) => {
+  console.log(order)
   return (
     <>
       <div
