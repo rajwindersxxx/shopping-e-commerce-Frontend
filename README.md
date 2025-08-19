@@ -4,6 +4,8 @@ A **modern frontend application** for an **e-commerce platform**, built with **R
 
 This app allows **users to browse products, place orders**, and **track their orders**, while **admins can manage products and orders**. The frontend communicates with a **Node.js/Express backend API**.
 
+**Backend Api repo**: [BackEnd source code](http://localhost:5173)
+
 ## 🛠 Tech Stack
 
 ### **Frontend**
@@ -58,8 +60,8 @@ client/
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/rajwindersxxx/intershipAssigment-frontend.git
-cd intershipAssigment-frontend
+git clone https://github.com/rajwindersxxx/shopping-e-commerce-Frontend.git
+cd shopping-e-commerce-Frontend
 ```
 
 2. Install dependencies:
