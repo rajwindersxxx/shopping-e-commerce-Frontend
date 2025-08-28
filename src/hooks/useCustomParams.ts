@@ -8,8 +8,6 @@ export function useCustomParams() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Get current search params
-
   function setParams(newParams: NewParams, path?: string) {
     const params = new URLSearchParams(location.search);
 

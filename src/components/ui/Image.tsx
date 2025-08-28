@@ -13,7 +13,7 @@ const Image = ({ src, alt, className }: ImageWithSpinnerProps) => {
       className={`relative  overflow-hidden rounded-lg ${className}`}
     >
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100" role="status">
           <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-100 border-t-orange-500"></div>
         </div>
       )}

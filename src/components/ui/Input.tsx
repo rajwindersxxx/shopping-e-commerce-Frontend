@@ -87,6 +87,7 @@ export function Input({
         disabled={disabled}
         {...props}
       />
+      {children}
       {error && <p className="absolute text-xs text-red-500">{error}</p>}
     </div>
   );

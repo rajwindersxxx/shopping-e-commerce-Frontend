@@ -53,7 +53,7 @@ const LoginForm = () => {
         />
         {error && <p className="text-center text-sm text-red-500">{error}</p>}
 
-        <PrimaryButton type="submit" disabled={isLoggingIn}>
+        <PrimaryButton type="submit" disabled={isLoggingIn} aria-label="login">
           Sign In
         </PrimaryButton>
       </form>
